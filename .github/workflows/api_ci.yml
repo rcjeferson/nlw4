@@ -1,0 +1,39 @@
+name: API CI
+
+on:
+  pull_request:
+    paths:
+      - "api/**"
+  push:
+    paths:
+      - "api/**"
+
+defaults:
+  run:
+    working-directory: api
+
+jobs:
+  api_test:
+    name: API Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+
+      - name: Make node_modules cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-api-${{ hashFiles('./api/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-api-
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run tests
+        run: yarn test
