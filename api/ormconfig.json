@@ -3,7 +3,6 @@
   "database": "./database/database.sqlite",
   "migrations": ["./database/migrations/**.ts"],
   "entities": ["./src/models/**.ts"],
-  "logging": true,
   "cli": {
     "migrationsDir": "./database/migrations"
   }
