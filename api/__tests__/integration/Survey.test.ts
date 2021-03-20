@@ -4,7 +4,7 @@ import { app } from "../../src/app";
 
 describe("Surveys", () => {
   beforeAll(async () => {
-    const connection = await createConnection();
+    const connection = await createConnection('surveys');
     await connection.runMigrations();
   });
 
